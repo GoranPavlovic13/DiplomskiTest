@@ -21,7 +21,8 @@ builder.Services.AddDbContextFactory<RepositoryContext>(options =>
 builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>()
-    //.AddType<ProgrammingLanguageType>()
+    .AddMutationType<Mutation>()
+    .AddType<ProgrammingLanguageType>()
     //.AddType<LectureType>()
     .AddProjections()
     .AddFiltering()

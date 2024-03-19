@@ -1,4 +1,6 @@
 ﻿using Entitites.Models;
+using HotChocolate.Resolvers;
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -12,23 +14,8 @@ namespace GraphQL.ProgrammingLanguages
     {
         protected override void Configure(IObjectTypeDescriptor<ProgrammingLanguage> descriptor)
         {
-            descriptor.Description("Represents a programming language with lectures to be learned.");
-
-            descriptor
-            .Field(pl => pl.Lectures)
-            .ResolveWith<Resolvers>(pl => pl.GetLectures(default!, default!))
-            .Description("This is the list of available lectures for this programming language.");
+            descriptor.Description("Represents a programming language with lectures to be learned.");                    
         }
-
-        private class Resolvers
-        {
-            public IQueryable<Lecture>? GetLectures(ProgrammingLanguage programmingLanguage, [Service(ServiceKind.Pooled)] RepositoryContext context) {
-                if (context.Lectures == null) 
-                    return null;
-
-                return context.Lectures
-                    .Where(l => l.ProgrammingLanguages != null && l.ProgrammingLanguages.Any(pl => pl.LanguageId == programmingLanguage.LanguageId));
-            }
-        }
+           
     }
 }
