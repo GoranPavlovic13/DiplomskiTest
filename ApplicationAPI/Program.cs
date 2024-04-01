@@ -13,6 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 
+//builder.Services.AddHttpClient();
+builder.Services.AddSingleton<HttpClient>();
+
 builder.Services.AddDbContextFactory<RepositoryContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection"));

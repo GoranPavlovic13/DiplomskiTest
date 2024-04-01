@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,10 @@ using Repository;
 namespace ApplicationAPI.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20240323112104_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,11 +30,11 @@ namespace ApplicationAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("ExerciseId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Option")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AnswerId");
 
@@ -48,9 +50,6 @@ namespace ApplicationAPI.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ExerciseDescription")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("TestId")
@@ -117,49 +116,49 @@ namespace ApplicationAPI.Migrations
                     b.HasData(
                         new
                         {
-                            LectureProgrammingLanguageId = new Guid("beb9d4c5-3c96-4c76-bad6-ea651d584941"),
+                            LectureProgrammingLanguageId = new Guid("31afb526-2592-4229-93d0-3f7f7d01cc9f"),
                             LanguageId = new Guid("8665c6cb-7dc0-4058-9bc7-7c65c7869d47"),
                             LectureId = new Guid("7e78b348-7834-44d3-ad9b-93155079e9be")
                         },
                         new
                         {
-                            LectureProgrammingLanguageId = new Guid("ffae9f11-e408-43cf-90c7-7c730bc405e1"),
+                            LectureProgrammingLanguageId = new Guid("872a4c87-65be-4895-b462-32a2b05995b9"),
                             LanguageId = new Guid("48e36ba7-6216-4b19-a671-066c0f5a8e0a"),
                             LectureId = new Guid("7e78b348-7834-44d3-ad9b-93155079e9be")
                         },
                         new
                         {
-                            LectureProgrammingLanguageId = new Guid("0f2f5d51-5703-4b8b-bf83-cc0911499038"),
+                            LectureProgrammingLanguageId = new Guid("b0dccbce-599b-44d5-af6b-c5c5ca96e3c9"),
                             LanguageId = new Guid("3a9723c8-af2c-46b9-a4cd-bcb32f5a90b6"),
                             LectureId = new Guid("7e78b348-7834-44d3-ad9b-93155079e9be")
                         },
                         new
                         {
-                            LectureProgrammingLanguageId = new Guid("a0b21428-ae2b-4ce3-8664-4fcc76627c1b"),
+                            LectureProgrammingLanguageId = new Guid("5c33be83-7643-4022-9bbf-b94777c0aefe"),
                             LanguageId = new Guid("bcd4aaec-f236-451a-92eb-7642471c8ecc"),
                             LectureId = new Guid("7e78b348-7834-44d3-ad9b-93155079e9be")
                         },
                         new
                         {
-                            LectureProgrammingLanguageId = new Guid("527de6ee-2bfc-481e-9560-611cfc50817d"),
+                            LectureProgrammingLanguageId = new Guid("b6a87691-5b93-4e17-a874-ece1e4f94f1e"),
                             LanguageId = new Guid("8665c6cb-7dc0-4058-9bc7-7c65c7869d47"),
                             LectureId = new Guid("7c36d05c-333e-4970-8377-e5c96d25578f")
                         },
                         new
                         {
-                            LectureProgrammingLanguageId = new Guid("170c7f74-cca2-44a0-87d9-5d2d7be21b6e"),
+                            LectureProgrammingLanguageId = new Guid("50f43d5b-a914-4136-abda-becb65d9cdf1"),
                             LanguageId = new Guid("48e36ba7-6216-4b19-a671-066c0f5a8e0a"),
                             LectureId = new Guid("7c36d05c-333e-4970-8377-e5c96d25578f")
                         },
                         new
                         {
-                            LectureProgrammingLanguageId = new Guid("af8b17bf-f77d-48fb-a456-0e419aa94e67"),
+                            LectureProgrammingLanguageId = new Guid("a4f9586f-3da8-4526-b0c5-9031a663c931"),
                             LanguageId = new Guid("3a9723c8-af2c-46b9-a4cd-bcb32f5a90b6"),
                             LectureId = new Guid("7c36d05c-333e-4970-8377-e5c96d25578f")
                         },
                         new
                         {
-                            LectureProgrammingLanguageId = new Guid("46519ca8-18f9-4bc6-89fc-0f23d5112915"),
+                            LectureProgrammingLanguageId = new Guid("d834e0e2-884d-4ba5-a86b-9e8384cb8d1a"),
                             LanguageId = new Guid("bcd4aaec-f236-451a-92eb-7642471c8ecc"),
                             LectureId = new Guid("7c36d05c-333e-4970-8377-e5c96d25578f")
                         });
@@ -225,12 +224,6 @@ namespace ApplicationAPI.Migrations
 
                     b.Property<Guid>("LectureProgrammingLanguageId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Level")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TestName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TestId");
 

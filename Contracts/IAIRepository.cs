@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entitites.Models
+namespace Contracts
 {
-    public enum Level
+    internal interface IAIRepository
     {
-        Begginer,
-        Intermediate,
-        Advanced
+
     }
 }

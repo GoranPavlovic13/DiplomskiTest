@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ApplicationAPI.Migrations
 {
-    public partial class InitialData : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,12 +40,13 @@ namespace ApplicationAPI.Migrations
                 name: "LectureProgrammingLanguages",
                 columns: table => new
                 {
+                    LectureProgrammingLanguageId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LectureId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LanguageId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LectureProgrammingLanguages", x => new { x.LectureId, x.LanguageId });
+                    table.PrimaryKey("PK_LectureProgrammingLanguages", x => x.LectureProgrammingLanguageId);
                     table.ForeignKey(
                         name: "FK_LectureProgrammingLanguages_Lectures_LectureId",
                         column: x => x.LectureId,
@@ -57,6 +58,62 @@ namespace ApplicationAPI.Migrations
                         column: x => x.LanguageId,
                         principalTable: "ProgrammingLanguages",
                         principalColumn: "LanguageId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tests",
+                columns: table => new
+                {
+                    TestId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LectureProgrammingLanguageId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tests", x => x.TestId);
+                    table.ForeignKey(
+                        name: "FK_Tests_LectureProgrammingLanguages_LectureProgrammingLanguageId",
+                        column: x => x.LectureProgrammingLanguageId,
+                        principalTable: "LectureProgrammingLanguages",
+                        principalColumn: "LectureProgrammingLanguageId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Exercises",
+                columns: table => new
+                {
+                    ExerciseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TestId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Exercises", x => x.ExerciseId);
+                    table.ForeignKey(
+                        name: "FK_Exercises_Tests_TestId",
+                        column: x => x.TestId,
+                        principalTable: "Tests",
+                        principalColumn: "TestId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Answer",
+                columns: table => new
+                {
+                    AnswerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Option = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ExerciseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Answer", x => x.AnswerId);
+                    table.ForeignKey(
+                        name: "FK_Answer_Exercises_ExerciseId",
+                        column: x => x.ExerciseId,
+                        principalTable: "Exercises",
+                        principalColumn: "ExerciseId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -82,27 +139,56 @@ namespace ApplicationAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "LectureProgrammingLanguages",
-                columns: new[] { "LanguageId", "LectureId" },
+                columns: new[] { "LectureProgrammingLanguageId", "LanguageId", "LectureId" },
                 values: new object[,]
                 {
-                    { new Guid("3a9723c8-af2c-46b9-a4cd-bcb32f5a90b6"), new Guid("7c36d05c-333e-4970-8377-e5c96d25578f") },
-                    { new Guid("48e36ba7-6216-4b19-a671-066c0f5a8e0a"), new Guid("7c36d05c-333e-4970-8377-e5c96d25578f") },
-                    { new Guid("8665c6cb-7dc0-4058-9bc7-7c65c7869d47"), new Guid("7c36d05c-333e-4970-8377-e5c96d25578f") },
-                    { new Guid("bcd4aaec-f236-451a-92eb-7642471c8ecc"), new Guid("7c36d05c-333e-4970-8377-e5c96d25578f") },
-                    { new Guid("3a9723c8-af2c-46b9-a4cd-bcb32f5a90b6"), new Guid("7e78b348-7834-44d3-ad9b-93155079e9be") },
-                    { new Guid("48e36ba7-6216-4b19-a671-066c0f5a8e0a"), new Guid("7e78b348-7834-44d3-ad9b-93155079e9be") },
-                    { new Guid("8665c6cb-7dc0-4058-9bc7-7c65c7869d47"), new Guid("7e78b348-7834-44d3-ad9b-93155079e9be") },
-                    { new Guid("bcd4aaec-f236-451a-92eb-7642471c8ecc"), new Guid("7e78b348-7834-44d3-ad9b-93155079e9be") }
+                    { new Guid("31afb526-2592-4229-93d0-3f7f7d01cc9f"), new Guid("8665c6cb-7dc0-4058-9bc7-7c65c7869d47"), new Guid("7e78b348-7834-44d3-ad9b-93155079e9be") },
+                    { new Guid("50f43d5b-a914-4136-abda-becb65d9cdf1"), new Guid("48e36ba7-6216-4b19-a671-066c0f5a8e0a"), new Guid("7c36d05c-333e-4970-8377-e5c96d25578f") },
+                    { new Guid("5c33be83-7643-4022-9bbf-b94777c0aefe"), new Guid("bcd4aaec-f236-451a-92eb-7642471c8ecc"), new Guid("7e78b348-7834-44d3-ad9b-93155079e9be") },
+                    { new Guid("872a4c87-65be-4895-b462-32a2b05995b9"), new Guid("48e36ba7-6216-4b19-a671-066c0f5a8e0a"), new Guid("7e78b348-7834-44d3-ad9b-93155079e9be") },
+                    { new Guid("a4f9586f-3da8-4526-b0c5-9031a663c931"), new Guid("3a9723c8-af2c-46b9-a4cd-bcb32f5a90b6"), new Guid("7c36d05c-333e-4970-8377-e5c96d25578f") },
+                    { new Guid("b0dccbce-599b-44d5-af6b-c5c5ca96e3c9"), new Guid("3a9723c8-af2c-46b9-a4cd-bcb32f5a90b6"), new Guid("7e78b348-7834-44d3-ad9b-93155079e9be") },
+                    { new Guid("b6a87691-5b93-4e17-a874-ece1e4f94f1e"), new Guid("8665c6cb-7dc0-4058-9bc7-7c65c7869d47"), new Guid("7c36d05c-333e-4970-8377-e5c96d25578f") },
+                    { new Guid("d834e0e2-884d-4ba5-a86b-9e8384cb8d1a"), new Guid("bcd4aaec-f236-451a-92eb-7642471c8ecc"), new Guid("7c36d05c-333e-4970-8377-e5c96d25578f") }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Answer_ExerciseId",
+                table: "Answer",
+                column: "ExerciseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Exercises_TestId",
+                table: "Exercises",
+                column: "TestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LectureProgrammingLanguages_LanguageId",
                 table: "LectureProgrammingLanguages",
                 column: "LanguageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LectureProgrammingLanguages_LectureId",
+                table: "LectureProgrammingLanguages",
+                column: "LectureId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tests_LectureProgrammingLanguageId",
+                table: "Tests",
+                column: "LectureProgrammingLanguageId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Answer");
+
+            migrationBuilder.DropTable(
+                name: "Exercises");
+
+            migrationBuilder.DropTable(
+                name: "Tests");
+
             migrationBuilder.DropTable(
                 name: "LectureProgrammingLanguages");
 
