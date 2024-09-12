@@ -14,7 +14,8 @@ namespace GraphQL.ProgrammingLanguages
     {
         protected override void Configure(IObjectTypeDescriptor<ProgrammingLanguage> descriptor)
         {
-            descriptor.Description("Represents a programming language with lectures to be learned.");                    
+            descriptor.Description("Represents a programming language with lectures to be learned."); 
+            
         }
            
     }

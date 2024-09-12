@@ -16,5 +16,6 @@ namespace Entitites.Models
         [ForeignKey(nameof(Exercise))]
         public Guid ExerciseId { get; set; }
         public Exercise? Exercise { get; set; }
+        public bool IsCorrect { get; set; } 
     }
 }

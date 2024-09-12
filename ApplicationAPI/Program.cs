@@ -21,15 +21,19 @@ builder.Services.AddDbContextFactory<RepositoryContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection"));
 });
 
+builder.Services.AddGraphQL();
+
 builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>()
     .AddMutationType<Mutation>()
+    .AddSubscriptionType<Subscription>()
     .AddType<ProgrammingLanguageType>()
     //.AddType<LectureType>()
     .AddProjections()
     .AddFiltering()
-    .AddSorting();
+    .AddSorting().
+    AddInMemorySubscriptions();
 
 builder.Services.AddControllers();
 
@@ -47,7 +51,9 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
     ForwardedHeaders = ForwardedHeaders.All
 });
 
-app.UseCors("CorsPolicy ");
+app.UseWebSockets();
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 

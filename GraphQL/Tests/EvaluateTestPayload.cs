@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entitites.Models
+namespace GraphQL.Tests
 {
-    public enum LanguageType
+    public record EvaluateTestPayload(bool success, string message, int score)
     {
-        Object_Oriented,
-        Procedural,
-        Other
     }
 }

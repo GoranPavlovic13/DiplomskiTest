@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GraphQL.ProgrammingLanguages
 {
-    public record AddProgrammingLanguageInput(string LanguageName, LanguageType LanguageType, string LanguageDescription, ICollection<Guid> selectedLectureIds)
+    public record AddProgrammingLanguageInput(string LanguageName, LanguageType LanguageType, string LanguageDescription, ICollection<Guid> SelectedLectureIds)
     {
     }
 }

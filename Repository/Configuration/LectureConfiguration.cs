@@ -19,12 +19,14 @@ namespace Repository.Configuration
                 new Lecture
                 {
                     LectureId = new Guid("7e78b348-7834-44d3-ad9b-93155079e9be"),
-                    LectureName = "Arrays"
+                    LectureName = "Arrays",
+                    LectureDescription = "Some Description."
                 },
                 new Lecture
                 {
                     LectureId = new Guid("7c36d05c-333e-4970-8377-e5c96d25578f"),
-                    LectureName = "Functions"                    
+                    LectureName = "Functions",
+                    LectureDescription = "Some Description."
                 }
             );
         }

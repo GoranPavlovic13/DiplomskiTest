@@ -1,4 +1,6 @@
 ﻿using Entitites.Models;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +23,14 @@ namespace GraphQL
         public IQueryable<Lecture>? GetLecture([Service] RepositoryContext context)
         {
             return context.Lectures;
-        }            
+        }
+
+        [UseProjection]
+        [UseFiltering]
+        [UseSorting]
+        public IQueryable<Test>? GetTest([Service] RepositoryContext context)
+        {
+            return context.Tests;
+        }
     }
 }
