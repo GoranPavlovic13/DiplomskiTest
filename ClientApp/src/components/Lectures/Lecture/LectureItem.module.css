@@ -1,0 +1,113 @@
+.lecture {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .lecture h3 {
+    margin: 0 0 0.25rem 0;
+  }
+  
+  .type {
+    margin-top: 0.25rem;
+    font-weight: bold;
+    color: #84b962;
+    font-size: 1.25rem;
+  }
+
+  .buttons {
+    display: flex; 
+    gap: 1rem; 
+  }
+  
+  .button {
+    font: inherit;
+    cursor: pointer;
+    background-color: #398672; 
+    border: 1px solid #398672;
+    color: white;
+    padding: 0.25rem 2rem;
+    border-radius: 20px;
+    font-weight: bold;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto 0;
+  }
+  
+  .button:hover,
+  .button:active {
+    background-color: #346958; 
+    border-color: #346958;
+  }
+  
+  
+.button.buttonBasic {
+    background-color: #5db7a3;
+    border: 1px solid #5db7a3;
+  }
+  
+  .button.buttonBasic:hover,
+  .button.buttonBasic:active {
+    background-color: #489d87;
+    border-color: #489d87;
+  }
+  
+  
+  .button.buttonIntermediate {
+    background-color: #398672;
+    border: 1px solid #398672;
+  }
+  
+  .button.buttonIntermediate:hover,
+  .button.buttonIntermediate:active {
+    background-color: #346958;
+    border-color: #346958;
+  }
+  
+  
+  .button.buttonAdvanced {
+    background-color: #2d635d;
+    border: 1px solid #2d635d;
+  }
+  
+  .button.buttonAdvanced:hover,
+  .button.buttonAdvanced:active {
+    background-color: #254e4a;
+    border-color: #254e4a;
+  }
+
+  .spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1); 
+    border-left-color: #5db7a3;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; 
+    width: 33.33%; 
+    text-align: center; 
+  }
+  
+  .loadingText {
+    margin-top: 10px;
+    color: #5db7a3;
+  }
