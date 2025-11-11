@@ -11,10 +11,8 @@ const AvailableLectures = () => {
     
     const { loading, error, data } = useQuery(GET_LECTURES_FOR_LANGUAGE, {
         variables: { id },
-<<<<<<< HEAD
         fetchPolicy: "cache-and-network"
-=======
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
+
       });
 
       if (loading) {
@@ -34,7 +32,6 @@ const AvailableLectures = () => {
         );
       }
 
-<<<<<<< HEAD
       const language = data.programmingLanguage.edges[0];
 
       const lecturesList = language.node.lectures.edges.map((lecture) => (
@@ -45,18 +42,6 @@ const AvailableLectures = () => {
         description={lecture.node.lectureDescription}
         languageId = {id}
         languageName={language.node.languageName}>                    
-=======
-      const language = data.programmingLanguage[0];
-
-      const lecturesList = language.lectures.map((lecture) => (
-        <LectureItem
-        key={lecture.lecture.lectureId}
-        id={lecture.lecture.lectureId}
-        name={lecture.lecture.lectureName}                    
-        description={lecture.lecture.lectureDescription}
-        languageId = {id}
-        languageName={language.languageName}>                    
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
         </LectureItem>
       ));
 

@@ -1,11 +1,9 @@
 import { ApolloClient, InMemoryCache, HttpLink, ApolloLink } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 
-<<<<<<< HEAD
+
 const httpLink = new HttpLink({ uri: 'http://localhost:5001/graphql' });
-=======
-const httpLink = new HttpLink({ uri: 'https://localhost:5001/graphql' });
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
+
 
 const loggerLink = new ApolloLink((operation, forward) => {
     console.log(`Starting request for ${operation.operationName}`);

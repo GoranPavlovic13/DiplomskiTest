@@ -1,28 +1,20 @@
 using ApplicationAPI.Extensions;
-using GraphQL;
-using GraphQL.Lectures;
-using GraphQL.ProgrammingLanguages;
-<<<<<<< HEAD
-using GraphQL.Queries;
-=======
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
+
 using GraphQL.Server.Ui.Voyager;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.EntityFrameworkCore;
-using Repository;
-<<<<<<< HEAD
-using HotChocolate.Data;
-using GraphQL.ProgrammingLanguages.Mutation;
+
 using DataAnnotatedModelValidations;
-=======
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
+using GraphQL;
+using GraphQL.ProgrammingLanguages;
+using GraphQL.Lectures;
+using GraphQL.ProgrammingLanguages.Mutation;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
-<<<<<<< HEAD
+
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
@@ -33,23 +25,11 @@ builder.Services.AddControllers()
 builder.Services.AddSingleton<HttpClient>();
 
 
-=======
-
-//builder.Services.AddHttpClient();
-builder.Services.AddSingleton<HttpClient>();
-
-builder.Services.AddDbContextFactory<RepositoryContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection"));
-});
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
-
 builder.Services.AddGraphQL();
 
 builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>()
-<<<<<<< HEAD
     .AddType<ProgrammingLanguageType>()
     .AddType<LectureType>()
     .AddMutationType<Mutation>()
@@ -61,18 +41,6 @@ builder.Services
     .AddSorting()
     .AddInMemorySubscriptions()
     .AddDataAnnotationsValidator();
-=======
-    .AddMutationType<Mutation>()
-    .AddSubscriptionType<Subscription>()
-    .AddType<ProgrammingLanguageType>()
-    //.AddType<LectureType>()
-    .AddProjections()
-    .AddFiltering()
-    .AddSorting().
-    AddInMemorySubscriptions();
-
-builder.Services.AddControllers();
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
 
 var app = builder.Build();
 

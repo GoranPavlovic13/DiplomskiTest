@@ -15,13 +15,9 @@ namespace Entitites.Models
         public Guid LectureId { get; set; }
         [Required(ErrorMessage = "Lecture name is required.")]
         public string? LectureName { get; set; }
-<<<<<<< HEAD
-        public string? LectureDescription { get; set; }
-        public ICollection<LectureProgrammingLanguage>? ProgrammingLanguages { get; set; }
-=======
 
         public string? LectureDescription { get; set; }
-        public ICollection<LectureProgrammingLanguage>? ProgrammingLanguages { get; set; }  
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
+        public ICollection<LectureProgrammingLanguage>? ProgrammingLanguages { get; set; }
+
     }
 }

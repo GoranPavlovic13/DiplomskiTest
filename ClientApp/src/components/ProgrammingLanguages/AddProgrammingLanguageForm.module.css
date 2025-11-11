@@ -2,10 +2,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-<<<<<<< HEAD
   margin-top: 2rem;
-=======
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
 }
 
 .form {
@@ -27,11 +24,7 @@
 .form-group {
   display: flex;
   flex-direction: column;
-<<<<<<< HEAD
   width: calc(50% - 0.5rem); /* Pola širine reda sa razmakom */
-=======
-  width: calc(50% - 0.5rem); /* Polovina širine sa razmakom između */
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
 }
 
 .form-group label {
@@ -41,12 +34,8 @@
 }
 
 .form-group input,
-<<<<<<< HEAD
 .form-group select,
 .form-group textarea {
-=======
-.form-group select{
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
   padding: 0.5rem;
   border-radius: 14px;
   background-color: #fff;
@@ -55,7 +44,6 @@
   font: inherit;
   width: 100%;
   box-sizing: border-box;
-<<<<<<< HEAD
   color: #000;
 }
 
@@ -63,26 +51,11 @@
   margin-top: 0.5rem;
   resize: vertical;
   height: 100%; /* da textarea popuni visinu reda */
-=======
-}
-
-.form-group textarea {
-  padding: 0.5rem;
-  border-radius: 14px;
-  background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  border: 1px solid #ccc;
-  font: inherit;
-  width: 100%;
-  box-sizing: border-box;
-  margin-top: 0.5rem;
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
 }
 
 .custom-select {
   width: 100%;
   margin-top: 0.5rem;
-<<<<<<< HEAD
   font: inherit;
   box-sizing: border-box;
 }
@@ -96,8 +69,6 @@
 .custom-select option:checked {
   background-color: #398672; /* boja za selektovane opcije */
   color: #fff;
-=======
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
 }
 
 .form-actions {

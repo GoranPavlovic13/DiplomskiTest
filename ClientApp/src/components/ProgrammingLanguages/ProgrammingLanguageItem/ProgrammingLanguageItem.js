@@ -1,28 +1,25 @@
 import classes from "./ProgrammingLanguageItem.module.css";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
 import { useMutation } from "@apollo/client";
 import { DELETE_LANGUAGE } from "../../../Graphql/Mutations/mutation";
 import { GET_PROGRAMMING_LANGUAGES } from "../../../Graphql/Queries/query";
-=======
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
+
 
 const ProgrammingLanguageItem = (props) => {
 
   const navigate = useNavigate();
 
-<<<<<<< HEAD
+
    const [deleteProgrammingLanguage] = useMutation(DELETE_LANGUAGE, {
     refetchQueries: [{ query: GET_PROGRAMMING_LANGUAGES }],
   });
 
-=======
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
+
   const handleLearnClick = () => {
     navigate(`/programming-languages/${props.id}/lectures`);
   }
 
-<<<<<<< HEAD
+
   const handleEditClick = () => {
     navigate(`/programming-languages/${props.id}/edit`); // nova ruta za update
   };
@@ -44,8 +41,7 @@ const ProgrammingLanguageItem = (props) => {
     }
   };
 
-=======
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
+
   function humanize(str) {
     var i, frags = str.split('_');
     for (i=0; i<frags.length; i++) {
@@ -65,7 +61,6 @@ const ProgrammingLanguageItem = (props) => {
         <button className={classes.button} onClick={handleLearnClick}>
           Learn
         </button>
-<<<<<<< HEAD
         <button
           className={`${classes.button} ${classes.editButton}`}
           onClick={handleEditClick}
@@ -78,8 +73,6 @@ const ProgrammingLanguageItem = (props) => {
         >
           Delete
         </button>
-=======
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
       </div>
     </li>
   );

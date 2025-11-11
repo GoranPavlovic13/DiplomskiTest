@@ -12,10 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
     <ProjectReference Include="..\Contracts\Contracts.csproj" />
-=======
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
     <ProjectReference Include="..\Entitites\Entitites.csproj" />
   </ItemGroup>
 

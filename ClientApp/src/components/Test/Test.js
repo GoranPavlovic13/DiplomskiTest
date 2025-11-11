@@ -47,12 +47,9 @@ const Test = () => {
   if (loading) return <p className={classes.loading}>Loading...</p>;
   if (error) return <p className={classes.error}>Error: {error.message}</p>;
 
-<<<<<<< HEAD
   const test = data.test.edges[0].node;
   console.log(test);
-=======
-  const test = data.test[0];
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
+
 
   return (
     <>

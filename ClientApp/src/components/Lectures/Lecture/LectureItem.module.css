@@ -38,10 +38,7 @@
     align-items: center;
     justify-content: center;
     margin: auto 0;
-<<<<<<< HEAD
     transition: background-color 0.2s ease;
-=======
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
   }
   
   .button:hover,
@@ -114,7 +111,6 @@
   .loadingText {
     margin-top: 10px;
     color: #5db7a3;
-<<<<<<< HEAD
   }
 
   .description {
@@ -131,6 +127,4 @@
 .button.deleteButton:hover {
   background-color: #e74c3c;
 }
-=======
-  }
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
+

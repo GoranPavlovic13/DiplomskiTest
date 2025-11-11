@@ -5,12 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
-<<<<<<< HEAD
   <ItemGroup>
     <Folder Include="DataTransferObjects\" />
   </ItemGroup>
-
-=======
->>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
 </Project>
