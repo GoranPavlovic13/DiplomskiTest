@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <PackageReference Include="DataAnnotatedModelValidations" Version="5.2.0" />
+=======
+>>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
     <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="6.1.1" />
     <PackageReference Include="HotChocolate.AspNetCore" Version="13.9.0" />
     <PackageReference Include="HotChocolate.Data" Version="13.9.0" />
@@ -18,7 +21,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Entitites\Entitites.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
+<<<<<<< HEAD
     <ProjectReference Include="..\Service.Contracts\Service.Contracts.csproj" />
+=======
+>>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 

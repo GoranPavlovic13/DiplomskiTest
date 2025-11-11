@@ -52,8 +52,11 @@
   object-fit: cover;
   transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem);
 }
+<<<<<<< HEAD
 
 .homeLink {
   text-decoration: none;
   color: inherit;
 }
+=======
+>>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7

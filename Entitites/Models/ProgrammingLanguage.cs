@@ -18,8 +18,14 @@ namespace Entitites.Models
         public string? LanguageName { get; set; }  
         public LanguageType? LanguageType { get; set; }
         public string? LanguageDescription { get; set; }
+<<<<<<< HEAD
         //[UsePaging]
         //[UseProjection]
         public ICollection<LectureProgrammingLanguage>? Lectures { get; set; }        
     }
 }
+=======
+        public ICollection<LectureProgrammingLanguage>? Lectures { get; set; }        
+    }
+}
+>>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7

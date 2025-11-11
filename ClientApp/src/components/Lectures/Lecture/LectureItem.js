@@ -22,7 +22,10 @@ const LectureItem = (props) => {
 
   const handleGenerateTest = async (difficultyLevel) => {
     setShowModal(true);
+<<<<<<< HEAD
     console.log(props);
+=======
+>>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
     try {
       await generateTest({
         variables: {

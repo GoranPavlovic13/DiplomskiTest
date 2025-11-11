@@ -53,6 +53,7 @@ export const ADD_LANGUAGE = gql`
   }
 `;
 
+<<<<<<< HEAD
 export const UPDATE_LANGUAGE = gql`
   mutation UpdateProgrammingLanguage($languageId: UUID!, $languageName: String!, $languageType: LanguageType!, $languageDescription: String!, $selectedLectureIds: [UUID!]!) {
     updateProgrammingLanguage(input: {languageId: $languageId, languageName: $languageName, languageType: $languageType,  languageDescription: $languageDescription, selectedLectureIds: $selectedLectureIds}) {
@@ -75,6 +76,8 @@ export const DELETE_LANGUAGE = gql`
 `;
 
 
+=======
+>>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
 export const ADD_LECTURE = gql`
   mutation AddLecture($lectureName: String!, $lectureDescription: String!, $selectedProgrammingLanguageIds: [UUID!]!) {
     addLecture(input: { lectureName: $lectureName, lectureDescription: $lectureDescription, selectedProgrammingLanguageIds: $selectedProgrammingLanguageIds}) {
@@ -85,6 +88,7 @@ export const ADD_LECTURE = gql`
         }
     }
   }
+<<<<<<< HEAD
 `;
 
 export const UPDATE_LECTURE = gql`
@@ -107,4 +111,6 @@ export const DELETE_LECTURE = gql`
       deletedLectureId
     }
   }
+=======
+>>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
 `;

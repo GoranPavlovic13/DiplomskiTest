@@ -3,6 +3,7 @@ import { GET_LECTURES } from "../../Graphql/Queries/query";
 import classes from "./AddProgrammingLanguageForm.module.css";
 import { ADD_LANGUAGE } from "../../Graphql/Mutations/mutation";
 
+<<<<<<< HEAD
 const AddProgrammingLanguageForm = ({ onClose }) => {
   const { loading, error, data } = useQuery(GET_LECTURES);
 
@@ -28,6 +29,11 @@ const AddProgrammingLanguageForm = ({ onClose }) => {
       })
     }
   });
+=======
+const AddProgrammingLanguageForm = ({ onClose, refetchLanguages }) => {
+  const { loading, error, data } = useQuery(GET_LECTURES);
+  const [addProgrammingLanguage] = useMutation(ADD_LANGUAGE);
+>>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -52,6 +58,11 @@ const AddProgrammingLanguageForm = ({ onClose }) => {
       // Opcionalno: Mozes obraditi response ovde, na primer resetovati formu ili zatvoriti modal.
       console.log("Added language:", result.data);
 
+<<<<<<< HEAD
+=======
+      refetchLanguages();
+
+>>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
       onClose(); // Zatvori formu ako je potrebno
     } catch (error) {
       console.error("Error adding language:", error);
@@ -92,9 +103,15 @@ const AddProgrammingLanguageForm = ({ onClose }) => {
               className={classes['custom-select']}
               multiple
             >
+<<<<<<< HEAD
               {data.lecture.edges.map((lec) => (
                 <option key={lec.node.lectureId} value={lec.node.lectureId}>
                   {lec.node.lectureName}
+=======
+              {data.lecture.map((lec) => (
+                <option key={lec.lectureId} value={lec.lectureId}>
+                  {lec.lectureName}
+>>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
                 </option>
               ))}
             </select>

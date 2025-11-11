@@ -2,6 +2,7 @@ import { gql } from "@apollo/client";
 
 export const GET_PROGRAMMING_LANGUAGES = gql`
 query ProgrammingLanguage {
+<<<<<<< HEAD
     programmingLanguage{
         edges{
             node{
@@ -63,6 +64,13 @@ query Lecture ($id: UUID!){
                 }
             }
         }
+=======
+    programmingLanguage {
+        languageId
+        languageName
+        languageDescription
+        languageType
+>>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
     }
 }
 `;
@@ -70,16 +78,22 @@ query Lecture ($id: UUID!){
 export const GET_LECTURES = gql`
 query Lecture {
     lecture {
+<<<<<<< HEAD
         edges{
             node{
                 lectureId
                 lectureName
             }
         }
+=======
+        lectureId
+        lectureName
+>>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
     }
 }
 `;
 
+<<<<<<< HEAD
     export const GET_LECTURES_FOR_LANGUAGE = gql`
     query ProgrammingLanguage($id: UUID!) {
         programmingLanguage(where: { languageId: {eq: $id } }) {
@@ -103,10 +117,28 @@ query Lecture {
         }
     }
     `;
+=======
+export const GET_LECTURES_FOR_LANGUAGE = gql`
+query ProgrammingLanguage($id: UUID!) {
+    programmingLanguage(where: { languageId: {eq: $id } }) {
+    languageId
+    languageName
+      lectures{
+        lecture{
+            lectureId
+            lectureName
+            lectureDescription
+        }
+    }
+    }
+  }
+`;
+>>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
 
 export const GET_TEST = gql`
 query Test($testId: UUID!){
     test (where: { testId: {eq: $testId } }){
+<<<<<<< HEAD
         edges{
             node{
                 testId
@@ -122,6 +154,19 @@ query Test($testId: UUID!){
                         content
                     }
                 }
+=======
+        testId
+        testName
+        level
+        lectureProgrammingLanguageId
+        exercises{
+            exerciseId
+            exerciseDescription
+            content
+            answers{
+                answerId
+                content
+>>>>>>> 9843978ab435edda7211d5a0e5926168a51e95d7
             }
         }
     }
