@@ -1,0 +1,30 @@
+.exercise {
+  margin-bottom: 1rem;
+}
+
+.description {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.answerText {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.content {
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-radius: 14px;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.answers {
+  list-style: none;
+  padding: 0;
+}
+
+.answers li {
+  margin: 0.5rem 0;
+}
