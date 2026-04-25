@@ -13,7 +13,7 @@ const Exercise = (props) => {
     <div className={classes.exercise}>
       <h3 className={classes.description}>{props.description}</h3>
       <Card>
-        <pre className={classes.code}>{props.content}</pre>
+        <pre className={classes.code}>{props.content.replace(/\\n/g, '\n')}</pre>
       </Card>
       <p className={classes.answerText}>Answers:</p>
         <ul className={classes.answers}>

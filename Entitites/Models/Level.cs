@@ -8,7 +8,7 @@ namespace Entitites.Models
 {
     public enum Level
     {
-        Begginer,
+        Beginner,
         Intermediate,
         Advanced
     }

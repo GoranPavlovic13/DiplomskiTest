@@ -1,4 +1,5 @@
 ﻿using Entitites.Models;
+using GraphQL.DataLoaders;
 using HotChocolate.Resolvers;
 using Microsoft.EntityFrameworkCore;
 using Repository;
@@ -14,19 +15,13 @@ namespace GraphQL.ProgrammingLanguages
     [ExtendObjectType(typeof(ProgrammingLanguage))]
     public class ProgrammingLanguageType
     {
-        [UsePaging]
-        [UseFiltering]
-        [UseSorting]
-        public IQueryable<Lecture?>? Lectures(
-            [Parent] ProgrammingLanguage programmingLanguage, 
-            [Service] IDbContextFactory<RepositoryContext> dbContextFactory)
+        public async Task<IEnumerable<Lecture>> GetLecturesAsync(
+        [Parent] ProgrammingLanguage language,
+        LecturesByLanguageIdDataLoader dataLoader,
+        CancellationToken cancellationToken)
         {
-            var context = dbContextFactory.CreateDbContext();
-            return context.LectureProgrammingLanguages?
-                .Where(lp => lp.LanguageId == programmingLanguage.LanguageId)
-                .Select(lp => lp.Lecture)
-                .AsQueryable();
-        } 
+            return await dataLoader.LoadAsync(language.LanguageId, cancellationToken);
+        }
 
     }
 }

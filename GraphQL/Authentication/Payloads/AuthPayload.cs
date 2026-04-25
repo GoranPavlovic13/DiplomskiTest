@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GraphQL.Authentication.Payloads
+{
+    public class AuthPayload
+    {
+        public string? Token { get; set; }
+
+    }
+}

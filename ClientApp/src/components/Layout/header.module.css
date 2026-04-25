@@ -8,14 +8,18 @@
   color: white;
   display: flex;
   align-items: center;
-  padding: 0 10%;
+  justify-content: space-between;
+  padding: 0 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  z-index: 10;
+  z-index: 100;
+
+  box-sizing: border-box; /* ⬅️ KLJUČNO */
 }
 
 .title-and-link {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
 .title-and-link h1 {
@@ -37,6 +41,7 @@
 .link:hover,
 .link:active {
   background-color: #163c34;
+  transform: scale(1.05);
 }
 
 .main-image {
@@ -59,3 +64,19 @@
   color: inherit;
 }
 
+.logoutButton {
+  background-color: #398672; /* nova boja */
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.logoutButton:hover,
+.logoutButton:active {
+  background-color: #346958; 
+  transform: scale(1.05); 
+}

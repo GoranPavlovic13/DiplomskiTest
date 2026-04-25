@@ -32,12 +32,12 @@ namespace GraphQL.ProgrammingLanguages.Mutation
                         LectureId = lectureId
                     };
 
-                    if (programmingLanguage.Lectures == null)
+                    if (programmingLanguage.LectureProgrammingLanguages == null)
                     {
-                        programmingLanguage.Lectures = new List<LectureProgrammingLanguage>();
+                        programmingLanguage.LectureProgrammingLanguages = new List<LectureProgrammingLanguage>();
                     }
 
-                    programmingLanguage.Lectures.Add(lectureProgrammingLanguage);
+                    programmingLanguage.LectureProgrammingLanguages.Add(lectureProgrammingLanguage);
                 }
             }
 
@@ -61,7 +61,7 @@ namespace GraphQL.ProgrammingLanguages.Mutation
 
             
             var existingLanguage = await context.ProgrammingLanguages
-                .Include(pl => pl.Lectures)
+                .Include(pl => pl.LectureProgrammingLanguages)
                 .FirstOrDefaultAsync(pl => pl.LanguageId == input.LanguageId)
                 ?? throw new GraphQLException($"Programming language with ID '{input.LanguageId}' not found.");
 
@@ -77,7 +77,7 @@ namespace GraphQL.ProgrammingLanguages.Mutation
             existingLanguage.LanguageDescription = input.LanguageDescription;
 
             
-            var existingLectureIds = existingLanguage.Lectures?
+            var existingLectureIds = existingLanguage.LectureProgrammingLanguages?
                 .Select(lp => lp.LectureId)
                 .ToList()
                 ?? new List<Guid>();
@@ -95,9 +95,9 @@ namespace GraphQL.ProgrammingLanguages.Mutation
 
             
             var removedLectureIds = existingLectureIds.Except(input.SelectedLectureIds).ToList();
-            if (existingLanguage.Lectures != null && removedLectureIds.Count > 0)
+            if (existingLanguage.LectureProgrammingLanguages != null && removedLectureIds.Count > 0)
             {
-                var relationsToRemove = existingLanguage.Lectures
+                var relationsToRemove = existingLanguage.LectureProgrammingLanguages
                     .Where(lp => removedLectureIds.Contains(lp.LectureId))
                     .ToList();
 
@@ -124,7 +124,7 @@ namespace GraphQL.ProgrammingLanguages.Mutation
                 throw new ArgumentNullException(nameof(context));
 
             var language = await context.ProgrammingLanguages
-                .Include(l => l.Lectures)
+                .Include(l => l.LectureProgrammingLanguages)
                 .FirstOrDefaultAsync(l => l.LanguageId == languageId);
 
             if (language is null)
@@ -132,9 +132,9 @@ namespace GraphQL.ProgrammingLanguages.Mutation
                 throw new GraphQLException(new Error("Programming language not found.", "LANGUAGE_NOT_FOUND"));
             }
 
-            if (language.Lectures != null && language.Lectures.Any())
+            if (language.LectureProgrammingLanguages != null && language.LectureProgrammingLanguages.Any())
             {
-                context.LectureProgrammingLanguages.RemoveRange(language.Lectures);
+                context.LectureProgrammingLanguages.RemoveRange(language.LectureProgrammingLanguages);
             }
 
             context.ProgrammingLanguages.Remove(language);

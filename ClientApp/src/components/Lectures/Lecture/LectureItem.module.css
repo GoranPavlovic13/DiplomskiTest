@@ -45,6 +45,7 @@
   .button:active {
     background-color: #346958; 
     border-color: #346958;
+    transform: scale(1.05);
   }
   
   
@@ -57,6 +58,7 @@
   .button.buttonBasic:active {
     background-color: #489d87;
     border-color: #489d87;
+    transform: scale(1.05);
   }
   
   
@@ -69,6 +71,7 @@
   .button.buttonIntermediate:active {
     background-color: #346958;
     border-color: #346958;
+    transform: scale(1.05);
   }
   
   
@@ -81,6 +84,7 @@
   .button.buttonAdvanced:active {
     background-color: #254e4a;
     border-color: #254e4a;
+    transform: scale(1.05);
   }
 
   .spinner {
@@ -126,5 +130,6 @@
 
 .button.deleteButton:hover {
   background-color: #e74c3c;
+  transform: scale(1.05);
 }
 

@@ -10,5 +10,7 @@ namespace Service.Contracts
     {
         IProgrammingLanguageService ProgrammingLanguageService { get; }
         ILectureService LectureService { get; }
+
+        IAuthenticationService AuthenticationService { get; }
     }
 }

@@ -51,7 +51,7 @@ const LectureItem = (props) => {
         <div className={classes.buttons}>
           <button
             className={`${classes.button} ${classes.buttonBasic}`}
-            onClick={() => handleGenerateTest("Beginer")}
+            onClick={() => handleGenerateTest("Beginner")}
             disabled={loading}
           >
             Begginer

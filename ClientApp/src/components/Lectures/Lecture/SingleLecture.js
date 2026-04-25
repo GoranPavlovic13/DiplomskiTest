@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { GET_LECTURES, GET_LECTURES_FOR_LANGUAGE } from "../../../Graphql/Queries/query";
 import { DELETE_LECTURE } from "../../../Graphql/Mutations/mutation";
+import { useAuth } from "../../../context/AuthContext";
 
 const SingleLecture = (props) => {
+  const {userRole, isAuthenticated} = useAuth();
   const navigate = useNavigate();
 
   const [deleteLecture] = useMutation(DELETE_LECTURE, {
@@ -105,7 +107,7 @@ const SingleLecture = (props) => {
         <h3>{props.name}</h3>
         <div className={classes.description}>{props.description}</div>
       </div>
-      <div className={classes.buttons}>
+      {isAuthenticated && userRole === "Administrator" && (<div className={classes.buttons}>
         <button
           className={classes.button}
           onClick={handleEditClick}
@@ -118,7 +120,8 @@ const SingleLecture = (props) => {
         >
           Delete
         </button>
-      </div>
+      </div>)}
+      
     </li>
   );
 };

@@ -4,10 +4,12 @@ import SingleLecture from "./Lecture/SingleLecture";
 import classes from "./AllLectures.module.css";
 import Card from "../UI/Card";
 import React, { useState } from "react";
-import AddLecture from "./AddLecture"
-import AddLectureSummary from  "./Lecture/AddLectureSummary";
+import AddLecture from "./AddLecture";
+import AddLectureSummary from "./Lecture/AddLectureSummary";
+import { useAuth } from "../../context/AuthContext";
 
 const AllLectures = () => {
+  const { userRole, isAuthenticated } = useAuth();
   const { loading, error, data } = useQuery(GET_LECTURES);
   const [isFormVisible, setFormVisible] = useState(false);
 
@@ -46,11 +48,13 @@ const AllLectures = () => {
   return (
     <>
       <AddLectureSummary></AddLectureSummary>
-      {isFormVisible && <AddLecture onClose={toggleFormVisibility}/>}  
+      {isFormVisible && <AddLecture onClose={toggleFormVisibility} />}
       <section className={classes.lectures}>
-        <button className={classes.button} onClick={toggleFormVisibility}>
-        {isFormVisible ? "^ Hide Form" : "+ Add Lecture"}
-        </button>
+        {isAuthenticated && userRole === "Administrator" && (
+          <button className={classes.button} onClick={toggleFormVisibility}>
+            {isFormVisible ? "^ Hide Form" : "+ Add Lecture"}
+          </button>
+        )}
         <Card>
           <ul>{lecturesList}</ul>
         </Card>

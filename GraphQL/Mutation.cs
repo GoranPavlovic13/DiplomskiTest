@@ -1,4 +1,5 @@
-﻿using Entitites.Models;
+﻿using AutoMapper;
+using Entitites.Models;
 using GraphQL.Lectures;
 using GraphQL.ProgrammingLanguages;
 using GraphQL.Tests;
@@ -10,6 +11,8 @@ using OpenAI_API;
 using OpenAI_API.Completions;
 using Repository;
 using Shared;
+using Shared.DataTransferObjects.Test;
+using Shared.HelperMethods;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,86 +27,142 @@ namespace GraphQL
     {
 
         private readonly IConfiguration _configuration;        
-        private readonly HttpClient _httpClient;        
+        private readonly HttpClient _httpClient;
+        private readonly IMapper _mapper;
 
-        public Mutation(IConfiguration configuration, HttpClient httpClient)
+        public Mutation(IConfiguration configuration, HttpClient httpClient, IMapper mapper)
         {
             _configuration = configuration;     
             _httpClient = httpClient;
+            _mapper = mapper;
         }
 
 
 
-        public async Task<AddTestPayload?> GenerateTestExampleAsync(AddTestInput input, 
-            [Service] RepositoryContext context, 
-            [Service] ITopicEventSender eventSender,
-            CancellationToken cancellationToken)
+        public async Task<AddTestPayload?> GenerateTestExampleAsync(
+        AddTestInput input,
+        [Service] RepositoryContext context,
+        [Service] ITopicEventSender eventSender,
+        CancellationToken cancellationToken)
         {
-            string inputText = $"Just return the clean JSON object. It represents a test consisting of 4 tasks which are short code examples in the {input.languageName} " +
-                $"programming language, from the {input.lectureName} lesson, {input.difficultyLevel} level of difficulty, with provided options for the user to choose the correct ones. " +
-                $"The number and order of correct and incorrect answers can be different for each task. " +
-                $"Code examples and answers for them are also generated according to the given criteria. " +
-                $"The test contains: testId (Guid ID of the test), testName (unique name of the test as a string), level (value of level is \"Intermediate\"), " +
-                $"exercises (a list of tasks (exercise)). Each exercise (task) contains exerciseId (Guid ID of the task), testId (same as testId from test), " +
-                $"exerciseDescription (text representing the description of the problem, i.e. the task), " +
-                $"content (a string that represents the specific content of the task, i.e. a code example), and answers (a list of answers for that exercise). " +
-                $"Each answer contains answerId (Guid ID of the answer), exerciseId (same as exerciseId from exercise),content (a string representing the text of the answer) and " +
-                $"isCorrect (bool variable that indicates if answer is true or false).";
+            const int maxRetries = 3;
+            string? lastError = null;
 
-
-            ChatCompletionRequest completionRequest = new()
+            for (int attempt = 1; attempt <= maxRetries; attempt++)
             {
-                Model = "gpt-3.5-turbo",
-                MaxTokens = 2000,
-                Messages = new List<Message>() { new Message()
-                                {
-                                    Role = "user",
-                                    Content = inputText
+                string inputText = $@"
+                    Return ONLY valid JSON. No explanations, comments, markdown, or code fences.
 
-                                }}
-            };
+                    JSON schema:
+                    {{
+                      ""testName"": ""string"",
+                      ""level"": ""{input.difficultyLevel}"",
+                      ""exercises"": [
+                        {{
+                          ""exerciseDescription"": ""string"",
+                          ""content"": ""string"",
+                          ""answers"": [
+                            {{
+                              ""content"": ""string"",
+                              ""isCorrect"": true
+                            }}
+                          ]
+                        }}
+                      ]
+                    }}
 
+                    Generate 4 exercises in {input.languageName}, topic {input.lectureName}, difficulty {input.difficultyLevel}.
+                    Each exercise must have at least one correct answer. The number of correct answers can vary per exercise.
+                    The number and order of correct and incorrect answers can be different for each task.
+                    Code examples and answers must respect the criteria above.
+                    Output must be a single-line JSON string.
+";
 
-            using var httpReq = new HttpRequestMessage(HttpMethod.Post, "https://api.openai.com/v1/chat/completions");
-            httpReq.Headers.Add("Authorization", $"Bearer {_configuration.GetConnectionString("AIConnection")}");
+                if (lastError != null)
+                    inputText += $"\nPrevious output was invalid because: {lastError}\nFix only that issue.";
 
-            string requestString = System.Text.Json.JsonSerializer.Serialize(completionRequest);
-            httpReq.Content = new StringContent(requestString, Encoding.UTF8, "application/json");
-
-            using HttpResponseMessage? httpResponse = await _httpClient.SendAsync(httpReq);
-            httpResponse.EnsureSuccessStatusCode();
-
-            var completionResponse = httpResponse.IsSuccessStatusCode ? System.Text.Json.JsonSerializer.Deserialize<ChatCompletionResponse>(await httpResponse.Content.ReadAsStringAsync()) : null;
-
-            if (completionResponse != null && context.Tests != null)
-            {
-                string? result = completionResponse.Choices?[0]?.Message?.Content;
-                var deserializedObject = JsonConvert.DeserializeObject(result!);
-                var jsonString = JsonConvert.SerializeObject(deserializedObject);
-                Test? test = JsonConvert.DeserializeObject<Test>(jsonString);
-                                         
-                if (test is not null && context.LectureProgrammingLanguages is not null)
+                // Poziv AI
+                var completionRequest = new ChatCompletionRequest
                 {
-                    var lectureProgrammingLanguage = await context.LectureProgrammingLanguages
-                    .Where(lpl => lpl.LectureId == input.lectureId && lpl.LanguageId == input.languageId)
-                    .FirstOrDefaultAsync();
+                    Model = "gpt-4o-mini",
+                    MaxTokens = 2000,
+                    Messages = new List<Message> { new Message { Role = "user", Content = inputText } }
+                };
 
-                    if(lectureProgrammingLanguage is not null)
-                        test.LectureProgrammingLanguageId = lectureProgrammingLanguage.LectureProgrammingLanguageId;
-                    
-                    context.Tests.Add(test);
-                    await context.SaveChangesAsync(cancellationToken);
+                using var httpReq = new HttpRequestMessage(HttpMethod.Post, "https://api.openai.com/v1/chat/completions");
+                httpReq.Headers.Add("Authorization", $"Bearer {_configuration.GetConnectionString("AIConnection")}");
+                httpReq.Content = new StringContent(System.Text.Json.JsonSerializer.Serialize(completionRequest),
+                                                   Encoding.UTF8, "application/json");
 
-                    await eventSender.SendAsync(nameof(Subscription.OnTestAdded), test, cancellationToken);
+                using var httpResponse = await _httpClient.SendAsync(httpReq, cancellationToken);
+                if (!httpResponse.IsSuccessStatusCode)
+                {
+                    lastError = $"OpenAI API error: {httpResponse.StatusCode}";
+                    continue;
                 }
-                    
-                
+
+                var completionResponse = System.Text.Json.JsonSerializer.Deserialize<ChatCompletionResponse>(
+                    await httpResponse.Content.ReadAsStringAsync(cancellationToken));
+
+                var result = completionResponse?.Choices?.FirstOrDefault()?.Message?.Content;
+                if (string.IsNullOrWhiteSpace(result))
+                {
+                    lastError = "Empty AI response";
+                    continue;
+                }
+
+                // Extract JSON i validacija
+                string? jsonError = null;
+                var json = JsonHelperMethods.ExtractJson(result);
+                if (json == null || !JsonHelperMethods.IsValidJson(json, out jsonError))
+                {
+                    lastError = jsonError ?? "Invalid JSON format";
+                    continue;
+                }
+
+                // Deserijalizacija u DTO
+                string? validationError = null;
+                TestAIDto? dto;
+                try
+                {
+                    dto = JsonConvert.DeserializeObject<TestAIDto>(json);
+                }
+                catch (Newtonsoft.Json.JsonException ex)
+                {
+                    lastError = ex.Message;
+                    continue;
+                }
+
+                if (dto == null || !JsonHelperMethods.IsValidAiTest(dto, out validationError))
+                {
+                    lastError = validationError;
+                    continue;
+                }
+
+                // Mapiranje u EF entitet
+                var test = _mapper.Map<Test>(dto);
+
+                // FK LectureProgrammingLanguage
+                var lpl = await context.LectureProgrammingLanguages!
+                    .FirstOrDefaultAsync(x => x.LectureId == input.lectureId && x.LanguageId == input.languageId,
+                                          cancellationToken);
+                if (lpl == null)
+                    throw new Exception("LectureProgrammingLanguage not found");
+
+                test.LectureProgrammingLanguageId = lpl.LectureProgrammingLanguageId;
+
+                context.Tests!.Add(test);
+                await context.SaveChangesAsync(cancellationToken);
+
+                await eventSender.SendAsync(nameof(Subscription.OnTestAdded), test, cancellationToken);
+
                 return new AddTestPayload(test);
-                
             }
-            else
-                return null;
+
+            // Ako posle retry-a ne uspe → loguj, ali korisnik ne vidi stack trace
+            throw new Exception("Failed to generate valid test after multiple attempts.");
         }
+
 
         public async Task<EvaluateTestPayload> EvaluateTestAsync(EvaluateTestInput input, [Service] RepositoryContext context)
         {

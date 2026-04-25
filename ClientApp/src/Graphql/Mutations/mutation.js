@@ -110,3 +110,40 @@ export const DELETE_LECTURE = gql`
   }
 
 `;
+
+
+export const LOGIN_MUTATION = gql`
+  mutation Login($userName: String!, $password: String!) {
+    login(
+      user: {
+        userName: $userName
+        password: $password
+      }
+    ) {
+      token
+    }
+  }
+`;
+
+export const REGISTER_MUTATION = gql`
+  mutation RegisterUser(
+    $firstName: String!
+    $lastName: String!
+    $userName: String!
+    $password: String!
+    $email: String
+  ) {
+    registerUser(
+      input: {
+        firstName: $firstName
+        lastName: $lastName
+        userName: $userName
+        password: $password
+        email: $email
+      }
+    ) {
+      success
+      errors
+    }
+  }
+`;

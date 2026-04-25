@@ -1,4 +1,5 @@
 ﻿using Entitites.Models;
+using HotChocolate.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ namespace GraphQL
 {
     public class Query
     {
+        //[Authorize(Roles = new[] { "Administrator" })]
         [UsePaging]
         [UseProjection]
         [UseFiltering]
@@ -19,7 +21,7 @@ namespace GraphQL
             return context.ProgrammingLanguages 
                 ?? Enumerable.Empty<ProgrammingLanguage>().AsQueryable();
         }
-
+        
         [UsePaging]
         [UseProjection]
         [UseFiltering]

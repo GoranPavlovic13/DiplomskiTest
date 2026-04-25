@@ -34,12 +34,12 @@ const AvailableLectures = () => {
 
       const language = data.programmingLanguage.edges[0];
 
-      const lecturesList = language.node.lectures.edges.map((lecture) => (
+      const lecturesList = language.node.lectureProgrammingLanguages.map((lecture) => (
         <LectureItem
-        key={lecture.node.lectureId}
-        id={lecture.node.lectureId}
-        name={lecture.node.lectureName}                    
-        description={lecture.node.lectureDescription}
+        key={lecture.lecture.lectureId}
+        id={lecture.lecture.lectureId}
+        name={lecture.lecture.lectureName}                    
+        description={lecture.lecture.lectureDescription}
         languageId = {id}
         languageName={language.node.languageName}>                    
         </LectureItem>

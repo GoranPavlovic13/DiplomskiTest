@@ -48,6 +48,7 @@
   .button:active {
     background-color: #346958; 
     border-color: #346958;
+    transform: scale(1.05); 
   }
   
   .spinner {
@@ -85,3 +86,130 @@
     color: red;
     font-weight: bold;
   }
+
+  .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem auto 0 auto;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* Navigaciona dugmad */
+.navButton {
+  background: none;
+  border: none;
+  color: #84b962;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+/* Hover efekat (malo tamnija nijansa) */
+.navButton:hover:not(:disabled) {
+  color: #6f9f4f;
+  transform: translateY(-1px);
+   text-decoration: underline;
+}
+
+/* Disabled stanje */
+.navButton:disabled {
+  color: #c5d9b3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Broj stranice (badge) */
+.pageNumber {
+  background-color: #f4f9ef; /* vrlo svetla verzija zelene */
+  color: #84b962;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+  font-weight: bold;
+  min-width: 40px;
+  text-align: center;
+}
+
+.searchInput {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.45rem 0.9rem;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font: inherit;
+  transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #84b962;
+  box-shadow: 0 0 0 2px rgba(132, 185, 98, 0.2);
+}
+
+.searchInput::placeholder {
+  color: #999;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between; /* 👈 LEVO i DESNO */
+  align-items: center;            /* 👈 sve u jednoj liniji */
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/* SEARCH ostaje levo */
+.searchInput {
+  width: 300px;
+  padding: 0.45rem 0.9rem;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font: inherit;
+}
+
+/* FILTER DESNO + horizontal layout */
+.filterBox {
+  display: flex;
+  flex-direction: row;   /* 👈 label + select u jednom redu */
+  align-items: center;
+  gap: 10px;
+}
+
+/* labela levo od select-a */
+.filterLabel {
+  font: inherit;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  opacity: 0.9;
+}
+
+/* select */
+.select {
+  padding: 0.45rem 0.7rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* responsive opcionalno */
+@media (max-width: 600px) {
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .searchInput {
+    width: 100%;
+  }
+
+  .filterBox {
+    justify-content: space-between;
+  }
+}

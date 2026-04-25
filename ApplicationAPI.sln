@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Presentation", "Application.Presentation\Application.Presentation.csproj", "{8BC73C12-F430-48E8-8915-A431779B6B47}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerService", "LoggerService\LoggerService.csproj", "{6A518619-5D12-4614-AA84-15D757D13B65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphQLTests", "GraphQLTests\GraphQLTests.csproj", "{09800242-AFF5-4B89-B76C-72341E8646DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,14 @@ Global
 		{8BC73C12-F430-48E8-8915-A431779B6B47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BC73C12-F430-48E8-8915-A431779B6B47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BC73C12-F430-48E8-8915-A431779B6B47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A518619-5D12-4614-AA84-15D757D13B65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A518619-5D12-4614-AA84-15D757D13B65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A518619-5D12-4614-AA84-15D757D13B65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A518619-5D12-4614-AA84-15D757D13B65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09800242-AFF5-4B89-B76C-72341E8646DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09800242-AFF5-4B89-B76C-72341E8646DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09800242-AFF5-4B89-B76C-72341E8646DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09800242-AFF5-4B89-B76C-72341E8646DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

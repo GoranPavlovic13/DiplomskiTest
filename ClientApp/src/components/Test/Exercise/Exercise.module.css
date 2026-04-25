@@ -12,6 +12,18 @@
   margin-bottom: 1rem;
 }
 
+.code {
+  padding: 1rem;
+  background-color: #f5f5f5; /* ili tvoja željena boja */
+  border-radius: 14px;
+  overflow-x: auto;        /* da se pojavi horizontalni scroll ako linija preduga */
+  white-space: pre-wrap;   /* ovo omogućava da \n bude nova linija */
+  word-break: break-word;   /* prelomi dugačke reči ako treba */
+  font-family: 'Fira Code', monospace; /* opcionalno, da liči na IDE font */
+  color: #000;              /* crni tekst, ili promeni po želji */
+  margin-bottom: 1rem;
+}
+
 .content {
   padding: 1rem;
   background-color: #f5f5f5;

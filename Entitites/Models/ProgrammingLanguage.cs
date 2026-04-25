@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotChocolate.Authorization;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,11 +18,13 @@ namespace Entitites.Models
         [Required(ErrorMessage = "Programming language name is required.")]
         public string? LanguageName { get; set; }  
         public LanguageType? LanguageType { get; set; }
+        //[Authorize(Roles = new[] { "Administrator" })]
         public string? LanguageDescription { get; set; }
 
         //[UsePaging]
         //[UseProjection]
-        public ICollection<LectureProgrammingLanguage>? Lectures { get; set; }        
+        //[Authorize(Roles = new[] { "Administrator" })]
+        public ICollection<LectureProgrammingLanguage>? LectureProgrammingLanguages { get; set; }        
     }
 }
 
